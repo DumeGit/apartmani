@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.*;
 import java.util.Date;
 
 @Getter
@@ -21,9 +22,9 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date periodFrom;
+    private LocalDate periodFrom;
 
-    private Date periodTo;
+    private LocalDate periodTo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "guest_id")
@@ -36,7 +37,7 @@ public class Reservation {
     @Enumerated
     ReservationStatusEnum reservationStatus;
 
-    public Reservation(Date periodFrom, Date periodTo, Guest guest, Apartment apartment, ReservationStatusEnum reservationStatus) {
+    public Reservation(LocalDate periodFrom, LocalDate periodTo, Guest guest, Apartment apartment, ReservationStatusEnum reservationStatus) {
         this.periodFrom = periodFrom;
         this.periodTo = periodTo;
         this.guest = guest;

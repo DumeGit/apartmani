@@ -8,5 +8,5 @@ import java.util.*;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
-    AppUser findByUsername(String username);
+    Optional<AppUser> findByEmail(String email);
 }

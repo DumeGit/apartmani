@@ -2,6 +2,7 @@ package com.apartments.user.guest.model;
 
 import com.apartments.reservation.model.Reservation;
 import com.apartments.review.model.Review;
+import com.apartments.security.*;
 import com.apartments.user.appuser.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,10 +24,6 @@ public class Guest extends AppUser {
 
     private String lastName;
 
-    private String email;
-
-    private String password;
-
     @OneToMany(mappedBy = "guest")
     private List<Reservation> reservationList;
 
@@ -34,9 +31,8 @@ public class Guest extends AppUser {
     private List<Review> reviewList;
 
     public Guest(String firstName, String lastName, String email, String password) {
+        super(email, password, AppRole.GUEST);
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.password = password;
     }
 }

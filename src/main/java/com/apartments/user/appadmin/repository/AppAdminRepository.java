@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppAdminRepository extends JpaRepository<AppAdmin, Long> {
+    AppAdmin getByEmail(String email);
 }

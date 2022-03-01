@@ -6,15 +6,18 @@ import com.apartments.apartment.repository.*;
 import com.apartments.reservation.model.*;
 import com.apartments.reservation.repository.*;
 import com.apartments.reservation.util.*;
+import com.apartments.security.*;
 import com.apartments.user.appadmin.model.*;
 import com.apartments.user.appadmin.repository.*;
 import com.apartments.user.guest.model.*;
 import com.apartments.user.guest.repository.*;
 import lombok.*;
+import org.apache.tomcat.jni.*;
 import org.springframework.boot.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Component
@@ -24,6 +27,8 @@ public class InitMockData implements ApplicationRunner {
     private final GuestRepository guestRepository;
     private final ApartmentRepository apartmentRepository;
     private final ReservationRepository reservationRepository;
+
+    private static final String HASH = "$2a$10$BwIMdwLtcRBQd96aMSgiEu2v9P6ynM6TM7SpEV3cfmvYYZ5srYXla";
 
     @Override
     @Transactional
@@ -35,41 +40,38 @@ public class InitMockData implements ApplicationRunner {
 
     @Transactional
     void addUsers() {
-        AppAdmin appAdmin = new AppAdmin();
-        appAdmin.setEmail("nino@gmail.com");
-        appAdmin.setPassword("kurac");
-        appAdmin.setUsername("dumke");
+        AppAdmin appAdmin = new AppAdmin("nino@gmail.com", HASH);
         appAdminRepository.save(appAdmin);
 
         Guest guest = new Guest();
         guest.setEmail("guest@gmail.com");
-        guest.setPassword("penis");
+        guest.setPassword(HASH);
         guest.setFirstName("Pero");
         guest.setLastName("Peric");
-        guest.setUsername("guest");
+        guest.setRole(AppRole.GUEST);
         guestRepository.save(guest);
 
         Guest guest1 = new Guest();
         guest1.setEmail("guest1@gmail.com");
-        guest1.setPassword("penis");
+        guest1.setPassword(HASH);
         guest1.setFirstName("Nino");
         guest1.setLastName("Ninic");
-        guest1.setUsername("niny");
+        guest1.setRole(AppRole.GUEST);
         guestRepository.save(guest1);
 
         Guest guest2 = new Guest();
         guest2.setEmail("guest2@gmail.com");
-        guest2.setPassword("penis");
+        guest2.setPassword(HASH);
         guest2.setFirstName("Tihana");
         guest2.setLastName("Tihanic");
-        guest2.setUsername("tihy");
+        guest2.setRole(AppRole.GUEST);
         guestRepository.save(guest2);
 
     }
 
     @Transactional
     void addApartments() {
-        AppAdmin appAdmin = appAdminRepository.getById(1L);
+        AppAdmin appAdmin = appAdminRepository.findById(1L).get();
         Apartment apartment = new Apartment();
         apartment.setAddress("Palit 267a");
         apartment.setAverageRating(0F);
@@ -101,29 +103,27 @@ public class InitMockData implements ApplicationRunner {
 
     @Transactional
     void addReservations() {
-        Guest guest1 = guestRepository.getById(2L);
-        Guest guest2 = guestRepository.getById(3L);
-        Apartment apartment1 = apartmentRepository.getById(1L);
-        Apartment apartment2 = apartmentRepository.getById(2L);
+        Guest guest1 = guestRepository.findById(2L).get();
+        Guest guest2 = guestRepository.findById(3L).get();
+        Apartment apartment1 = apartmentRepository.findById(1L).get();
+        Apartment apartment2 = apartmentRepository.findById(2L).get();
 
         Reservation reservation = new Reservation();
         reservation.setReservationStatus(ReservationStatusEnum.REQUESTED);
         reservation.setGuest(guest1);
         reservation.setApartment(apartment1);
-        Date from = new Date();
-        Date to = new Date();
-        to.setTime(from.getTime() + 100L);
+        LocalDate from = LocalDate.now();
+        LocalDate to = from.plusDays(7);
         reservation.setPeriodFrom(from);
-        reservation.setPeriodFrom(to);
+        reservation.setPeriodTo(to);
         reservationRepository.save(reservation);
 
         Reservation reservation1 = new Reservation();
         reservation1.setReservationStatus(ReservationStatusEnum.ACCEPTED);
         reservation1.setGuest(guest2);
         reservation1.setApartment(apartment2);
-        to.setTime(from.getTime() + 100L);
         reservation1.setPeriodFrom(from);
-        reservation1.setPeriodFrom(to);
+        reservation1.setPeriodTo(to);
         reservationRepository.save(reservation1);
     }
 }
