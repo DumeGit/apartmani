@@ -20,6 +20,12 @@ export default function AdminHeader() {
             onClick: () => history.push("/admin/home"),
             colorClass : "bg-primary",
             variant: "primary"
+        }, {
+            key: "CurrentReservations",
+            title : "Reservations",
+            onClick: () => history.push("/admin/reservations"),
+            colorClass : "bg-primary",
+            variant: "primary"
         },
         {
             key: "AdminLogout",

@@ -13,7 +13,6 @@ import { DateRangePicker } from 'react-date-range';
 import { addDays, parseISO, parse } from 'date-fns';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../app/reducer";
-import {Slide} from "react-slideshow-image";
 import * as api from "../../api/reservations"
 import {LoadingCircle} from "../../util/LoadingCircle";
 import {actions} from "../../pages/guest/apartments/details/GuestApartmentsDetails.slice";
@@ -25,6 +24,8 @@ interface ApartmentDetailsProps {
 }
 
 export default function ApartmentDetails({id} : ApartmentDetailsProps) {
+    const slideshow = require('react-slideshow-image');
+    const {Slide}  = slideshow;
     const {result, status} = useSelector((state: RootState) => state.guestApartmentsDetails);
     const dispatch = useDispatch();
 

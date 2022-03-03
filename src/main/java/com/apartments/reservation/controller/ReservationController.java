@@ -30,6 +30,12 @@ public class ReservationController {
         return reservationService.search(authentication.getName());
     }
 
+    @GetMapping("/searchAccepted")
+    public @ResponseBody
+    List<ReservationSearchDto> searchAccepted() {
+        return reservationService.searchAccepted();
+    }
+
     @Secured("ROLE_ADMIN")
     @GetMapping("/search")
     public @ResponseBody

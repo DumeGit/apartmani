@@ -34,7 +34,7 @@ export default function AppRoutes() {
         <Switch>
             {notLoggedIn() && <Route path="/" exact component={LandingPage} />}
             {notLoggedIn() && <Redirect to="/"/>}
-            {loggedIn() && isAdmin() && <Route path="/admin/home" exact component={AdminHomePage} />}
+            {loggedIn() && isAdmin() && <Route path="/admin/:content" exact component={AdminHomePage} />}
             {loggedIn() && isAdmin() && <Redirect from="*" to="/admin/home"/>}
             {loggedIn() && isGuest() && <Route path="/guest/:content/:id?" exact component={GuestHomePage} />}
             {loggedIn() && isGuest() && <Redirect from="*" to="/guest/home"/>}

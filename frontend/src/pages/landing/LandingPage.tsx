@@ -12,7 +12,6 @@ import {
     CarouselIndicators,
     CarouselItem, Modal, ModalBody, ModalHeader
 } from "reactstrap";
-import {Slide} from 'react-slideshow-image';
 import "../../resources/styles/slideStyle.css"
 import AdminLogin from "../admin/login/AdminLogin";
 import GuestLogin from "../guest/login/GuestLogin";
@@ -20,6 +19,8 @@ import {LockClosedIcon, UserIcon} from "@heroicons/react/solid";
 import AppButton from "../../components/AppButton";
 
 export default function LandingPage() {
+    const slideshow = require('react-slideshow-image');
+    const {Slide}  = slideshow;
     const slideImages = [
         'https://www.rab-visit.com/objekti_slike/260/carousel/19102017010153_20170605_203644_resized.jpg?width=720&height=425',
         'https://www.rab-visit.com/objekti_slike/260/carousel/30092014123038_DSC_7035m.jpg?width=720&height=425',

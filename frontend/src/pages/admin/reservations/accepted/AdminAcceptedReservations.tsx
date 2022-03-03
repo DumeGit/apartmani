@@ -1,26 +1,28 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../app/reducer";
-import {actions} from "./AdminReservations.slice";
-import {LoadingCircle} from "../../../util/LoadingCircle";
-import {formatDate} from "../../../util/util";
+import {RootState} from "../../../../app/reducer";
+import {actions} from "./AdminAcceptedReservations.slice";
+import {LoadingCircle} from "../../../../util/LoadingCircle";
+import {formatDate} from "../../../../util/util";
 import {Card, CardBody, CardHeader} from "reactstrap";
-import * as api from "../../../api/reservations"
+import * as api from "../../../../api/reservations"
 
-export default function AdminReservations() {
+export default function AdminAcceptedReservations() {
     const dispatch = useDispatch();
 
-    const {reservations} = useSelector((state: RootState) => state.adminReservations.result);
-    const {reservationsStatus} = useSelector((state: RootState) => state.adminReservations.status);
+    const {reservations} = useSelector((state: RootState) => state.adminAcceptedReservations.result);
+    const {reservationsStatus} = useSelector((state: RootState) => state.adminAcceptedReservations.status);
 
     useEffect(() => {
-        dispatch(actions.getAllReservations())
+        dispatch(actions.getAllAcceptedReservations())
     }, [dispatch]);
 
     return (
         <LoadingCircle status={reservationsStatus}>
-            <CardHeader><h2>Pending reservations </h2></CardHeader>
             <Card className="p-10">
+                <CardHeader>
+                    <h2> Accepted reservations </h2>
+                </CardHeader>
                 <CardBody>
                     <div className="flex flex-col">
                         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -47,18 +49,6 @@ export default function AdminReservations() {
                                             >
                                                 Period
                                             </th>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Accept
-                                            </th>
-                                            <th
-                                                scope="col"
-                                                className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                            >
-                                                Deny
-                                            </th>
                                         </tr>
                                         </thead>
                                         <tbody className="bg-white divide-y divide-gray-200">
@@ -78,39 +68,6 @@ export default function AdminReservations() {
                                                             className="text-sm text-gray-900">{reservation.apartmentName}</div>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{formatDate(reservation.periodFrom.substr(0, 10))} - {formatDate(reservation.periodTo.substr(0, 10))}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="#" className="text-green-600 hover:text-green-900"
-                                                           onClick={async () => {
-                                                               let data = ({
-                                                                   reservationId: reservation.id
-                                                               })
-                                                               try {
-                                                                   await api.accept(data);
-                                                                   window.location.reload();
-                                                               } catch (error) {
-
-                                                               }
-                                                           }}>
-                                                            Accept
-                                                        </a>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                        <a href="#" className="text-red-600 hover:text-red-900"
-                                                           onClick={async () => {
-                                                               let data = ({
-                                                                   reservationId: reservation.id
-                                                               })
-                                                               try {
-                                                                   await api.deny(data);
-                                                                   window.location.reload();
-                                                               } catch (error) {
-
-                                                               }
-
-                                                           }}>
-                                                            Deny
-                                                        </a>
-                                                    </td>
 
                                                 </tr>
                                             ))}

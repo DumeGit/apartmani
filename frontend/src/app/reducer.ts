@@ -4,6 +4,7 @@ import {adminReservations} from "../pages/admin/reservations/AdminReservations.s
 import {guestApartments} from "../pages/guest/apartments/GuestApartments.slice";
 import {guestApartmentsDetails} from "../pages/guest/apartments/details/GuestApartmentsDetails.slice";
 import {guestReservations} from "../pages/guest/reservations/GuestReservations.slice";
+import {adminAcceptedReservations} from "../pages/admin/reservations/accepted/AdminAcceptedReservations.slice";
 
 export const rootReducer = combineReducers({
     app,
@@ -11,6 +12,7 @@ export const rootReducer = combineReducers({
     guestApartments,
     guestApartmentsDetails,
     guestReservations,
+    adminAcceptedReservations,
 });
 
 export type RootState = ReturnType<typeof rootReducer>

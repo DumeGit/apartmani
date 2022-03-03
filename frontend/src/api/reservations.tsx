@@ -11,6 +11,13 @@ export async function getAllReservations() : Promise<Reservation[]> {
 
 }
 
+export async function getAllAcceptedReservations() : Promise<Reservation[]> {
+
+    const response = await fetch("http://localhost:8888/reservation/searchAccepted", {credentials: "include"});
+    return response.json();
+
+}
+
 export async function getGuestReservations() : Promise<Reservation[]> {
 
     const response = await fetch("http://localhost:8888/reservation/searchByGuest", {credentials: "include"});

@@ -78,7 +78,17 @@ public class ReservationService {
 
     public List<ReservationSearchDto> searchByAdmin() {
 
-        List<Reservation> reservationList = reservationRepository.findAll();
+        List<Reservation> reservationList = reservationRepository.findAllByReservationStatus(ReservationStatusEnum.REQUESTED);
+
+        return reservationList.stream()
+                .map(element -> modelMapperConfig.modelMapper().map(element, ReservationSearchDto.class))
+                .collect(Collectors.toList());
+
+    }
+
+    public List<ReservationSearchDto> searchAccepted() {
+
+        List<Reservation> reservationList = reservationRepository.findAllByReservationStatus(ReservationStatusEnum.ACCEPTED);
 
         return reservationList.stream()
                 .map(element -> modelMapperConfig.modelMapper().map(element, ReservationSearchDto.class))

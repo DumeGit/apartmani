@@ -16,7 +16,6 @@ import {
     Modal, ModalBody,
     ModalHeader
 } from "reactstrap";
-import {Slide} from "react-slideshow-image";
 import AppButton from "../../../components/AppButton";
 import {UserIcon} from "@heroicons/react/solid";
 import GuestLogin from "../login/GuestLogin";
@@ -24,6 +23,8 @@ import * as api from "../../../api/apartments";
 import {useHistory} from "react-router-dom";
 
 export default function GuestApartments() {
+    const slideshow = require('react-slideshow-image');
+    const {Slide}  = slideshow;
     const dispatch = useDispatch();
     const history = useHistory();
 
