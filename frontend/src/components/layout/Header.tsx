@@ -13,7 +13,7 @@ interface HeaderProps {
     buttonTitle: string,
 }
 
-export default function Header({actions, buttonTitle} :HeaderProps) {
+export default function Header({actions, buttonTitle}: HeaderProps) {
     return (
         <div>
             <Navbar
@@ -24,18 +24,15 @@ export default function Header({actions, buttonTitle} :HeaderProps) {
                     className="me-auto"
                     href="/"
                 >
-                    <img className="h-10 w-20 rounded-full" src="https://cdn.worldvectorlogo.com/logos/rab.svg" alt="lindaLogo" />
+                    <img className="h-10 w-20 rounded-full" src="https://cdn.worldvectorlogo.com/logos/rab.svg"
+                         alt="lindaLogo"/>
                 </NavbarBrand>
-                <NavbarToggler
-                    className="me-2"
-                    onClick={function noRefCheck(){}}
-                />
 
-                    {actions?.map((action) => (
-                        <NavbarText>
-                        <AppButton key = {action.key} title={action.title} onClick={action.onClick} icon={action.icon} />
-                        </NavbarText>
-                    ))}
+                {actions?.map((action) => (
+                    <NavbarText>
+                        <AppButton key={action.key} title={action.title} onClick={action.onClick} icon={action.icon}/>
+                    </NavbarText>
+                ))}
 
             </Navbar>
         </div>

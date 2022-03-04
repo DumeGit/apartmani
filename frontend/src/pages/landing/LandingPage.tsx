@@ -59,7 +59,7 @@ export default function LandingPage() {
                         </div>
                         <CardBody>
                             <CardTitle tag="h5">
-                                Apartman Luka
+                                Apartman Linda
                             </CardTitle>
                             <CardSubtitle
                                 className="mb-2 text-muted"
@@ -89,7 +89,7 @@ export default function LandingPage() {
                         </div>
                         <CardBody>
                             <CardTitle tag="h5">
-                                Apartman Linda
+                                Apartman Nino
                             </CardTitle>
                             <CardSubtitle
                                 className="mb-2 text-muted"

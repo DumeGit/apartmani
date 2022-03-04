@@ -6,6 +6,7 @@ import {HeaderAction} from "../../../components/layout/HeaderModel";
 import * as api from "../../../api/auth"
 import {actions} from "../../../App.slice";
 import Header from "../../../components/layout/Header";
+import {CalendarIcon, HomeIcon, LockClosedIcon} from "@heroicons/react/solid";
 
 export default function AdminHeader() {
     const dispatch = useDispatch();
@@ -19,13 +20,15 @@ export default function AdminHeader() {
             title : currentUser.email,
             onClick: () => history.push("/admin/home"),
             colorClass : "bg-primary",
-            variant: "primary"
+            variant: "primary",
+            icon: <HomeIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         }, {
             key: "CurrentReservations",
             title : "Reservations",
             onClick: () => history.push("/admin/reservations"),
             colorClass : "bg-primary",
-            variant: "primary"
+            variant: "primary",
+            icon: <CalendarIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         },
         {
             key: "AdminLogout",
@@ -43,7 +46,8 @@ export default function AdminHeader() {
                     })
                     .catch((reason) => console.warn("Logout failed" + reason)),
             colorClass: "bg-secondary",
-            variant: "secondary"
+            variant: "secondary",
+            icon: <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         },
 
     ];

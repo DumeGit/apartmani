@@ -6,7 +6,7 @@ import {HeaderAction} from "../../../components/layout/HeaderModel";
 import * as api from "../../../api/auth"
 import {actions} from "../../../App.slice";
 import Header from "../../../components/layout/Header";
-import {HomeIcon, LockClosedIcon, UserIcon} from "@heroicons/react/solid";
+import {CalendarIcon, HomeIcon, LockClosedIcon, UserIcon} from "@heroicons/react/solid";
 
 export default function GuestHeader() {
     const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function GuestHeader() {
             onClick: () => history.push("/guest/reservations"),
             colorClass : "bg-primary",
             variant: "primary",
-            icon: <HomeIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
+            icon: <CalendarIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         },
         {
             key: "GuestLogout",
